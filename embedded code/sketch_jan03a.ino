@@ -1,7 +1,7 @@
-
 #include <SPI.h>
 
 volatile boolean received;
+volatile uint16_t  Slavereceived, Slavereceived2;
 int count=0;
 int count1=0;
 int temp=0;
@@ -24,7 +24,7 @@ void setup()
 
 ISR (SPI_STC_vect)                        
 {
-    SlaveData = SPDR;            
+    Slavereceived = SPDR;            
     received = true;
 }
 
@@ -34,7 +34,7 @@ void loop()
 {
   if(received)                          
   {  
-      if(SlaveData != 0)
+      if(Slavereceived != 0)
       {
       received = false;
       count++;  
@@ -56,3 +56,4 @@ void loop()
       }
   }
 }
+
